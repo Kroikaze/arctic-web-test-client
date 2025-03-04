@@ -1,4 +1,3 @@
-import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
 import type { Linter } from 'eslint';
 import globals from 'globals';
@@ -8,8 +7,6 @@ import prettier from 'eslint-plugin-prettier';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import reactPlugin from 'eslint-plugin-react';
-
-const compat = new FlatCompat();
 
 export default [
     { ignores: ['dist', '**/*.d.ts'] },
@@ -49,5 +46,4 @@ export default [
             'react/react-in-jsx-scope': 'off',
         },
     },
-    ...compat.extends('plugin:react/recommended', 'plugin:prettier/recommended'),
 ] satisfies Linter.Config[];
