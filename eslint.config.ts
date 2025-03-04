@@ -22,7 +22,7 @@ export default [
             globals: globals.browser,
             parser: tsParser,
             parserOptions: {
-                project: './tsconfig.app.json',
+                project: './tsconfig.eslint.json',
                 ecmaFeatures: {
                     jsx: true,
                 },
