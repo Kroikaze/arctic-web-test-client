@@ -48,5 +48,5 @@ export default [
             ...reactPlugin.configs.recommended.rules,
         },
     },
-    ...compat.extends('plugin:react/recommended', 'plugin:prettier/recommended')
+    ...compat.extends('plugin:react/recommended', 'plugin:prettier/recommended'),
 ] satisfies Linter.Config[];
