@@ -46,6 +46,7 @@ export default [
             'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
             'prettier/prettier': 'error',
             ...reactPlugin.configs.recommended.rules,
+            'react/react-in-jsx-scope': 'off',
         },
     },
     ...compat.extends('plugin:react/recommended', 'plugin:prettier/recommended'),
