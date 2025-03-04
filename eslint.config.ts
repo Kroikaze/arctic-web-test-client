@@ -24,16 +24,21 @@ export default [
             parserOptions: {
                 project: './tsconfig.app.json',
                 ecmaFeatures: {
-                    jsx: true
-                }
+                    jsx: true,
+                },
             },
         },
         plugins: {
             '@typescript-eslint': tseslint as unknown as Linter,
-            'react': reactPlugin,
+            react: reactPlugin,
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
             prettier,
+        },
+        settings: {
+            react: {
+                version: 'detect',
+            },
         },
         rules: {
             ...tseslint.configs.recommended.rules,
