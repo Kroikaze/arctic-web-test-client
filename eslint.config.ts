@@ -1,12 +1,13 @@
 import js from '@eslint/js';
-import type { Linter } from 'eslint';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import prettier from 'eslint-plugin-prettier';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
+import type { Linter } from 'eslint';
+import importPlugin from 'eslint-plugin-import';
+import prettier from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
 
 export default [
     { ignores: ['dist', '**/*.d.ts'] },
@@ -31,6 +32,7 @@ export default [
             'react-hooks': reactHooks,
             'react-refresh': reactRefresh,
             prettier,
+            import: importPlugin,
         },
         settings: {
             react: {
@@ -44,6 +46,17 @@ export default [
             'prettier/prettier': 'error',
             ...reactPlugin.configs.recommended.rules,
             'react/react-in-jsx-scope': 'off',
+            'import/order': [
+                'error',
+                {
+                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+                    'newlines-between': 'always',
+                    alphabetize: { order: 'asc', caseInsensitive: true },
+                },
+            ],
+            'import/first': 'error',
+            'import/newline-after-import': 'error',
+            'import/no-duplicates': 'error',
         },
     },
 ] satisfies Linter.Config[];
