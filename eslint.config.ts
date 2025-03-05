@@ -7,7 +7,13 @@ import prettier from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default [
     { ignores: ['dist', '**/*.d.ts'] },
@@ -21,6 +27,7 @@ export default [
             parser: tsParser,
             parserOptions: {
                 project: './tsconfig.json',
+                tsconfigRootDir: __dirname,
                 ecmaFeatures: {
                     jsx: true,
                 },
@@ -33,16 +40,22 @@ export default [
             'react-refresh': reactRefresh,
             prettier,
             import: importPlugin,
+            'simple-import-sort': simpleImportSort,
         },
         settings: {
             react: {
                 version: 'detect',
             },
             'import/resolver': {
+                node: {
+                    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                },
                 typescript: {
+                    alwaysTryTypes: true,
                     project: './tsconfig.json',
                 },
             },
+            'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
         },
         rules: {
             ...tseslint.configs.recommended.rules,
@@ -51,14 +64,8 @@ export default [
             'prettier/prettier': 'error',
             ...reactPlugin.configs.recommended.rules,
             'react/react-in-jsx-scope': 'off',
-            'import/order': [
-                'error',
-                {
-                    groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
-                    'newlines-between': 'always',
-                    alphabetize: { order: 'asc', caseInsensitive: true },
-                },
-            ],
+            'simple-import-sort/imports': 'error',
+            'simple-import-sort/exports': 'error',
             'import/first': 'error',
             'import/newline-after-import': 'error',
             'import/no-duplicates': 'error',
