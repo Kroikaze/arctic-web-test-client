@@ -1,20 +1,13 @@
 import { Link } from 'react-router-dom';
 
-import ShoppingBag from '../assets/Images/Shopping_bag.png';
+import ShoppingCart from './ShoppingCart.tsx';
 import Nav from './Nav.tsx';
 
 const Header = () => {
     return (
         <header className="bg-white">
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
-                <div className="flex items-center">
-                    <img src={ShoppingBag} alt="Корзина" className="mr-2" />
-                    <div className="flex flex-col items-start">
-                        <span className="text-sm">Корзина(5):</span>
-                        <span className="font-bold">34 000 $</span>
-                    </div>
-                </div>
-
+                <ShoppingCart />
                 <div className="flex flex-col text-center">
                     <h1 className="text-4xl">NEVA TIME</h1>
                     <p className="text-sm">
