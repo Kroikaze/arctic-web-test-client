@@ -1,6 +1,6 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Header from './components/Header.tsx';
+import Header from './components/Header/Header.tsx';
 
 const App = () => {
     return (
