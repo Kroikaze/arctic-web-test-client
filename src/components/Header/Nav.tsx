@@ -1,47 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const navs = [
-    {
-        text: 'Главная',
-        link: '/main',
-    },
-    {
-        text: 'Часы',
-    },
-    {
-        text: 'Сумки',
-        link: '/bags',
-    },
-    {
-        text: 'Рюкзаки',
-        link: '/backpacks',
-    },
-    {
-        text: 'Кошельки',
-        link: '/wallets',
-    },
-    {
-        text: 'Браслеты',
-        link: '/bracelets',
-    },
-    {
-        text: 'Гарантия',
-        link: '/guarantee',
-    },
-    {
-        text: 'Доставка',
-        link: '/delivery',
-    },
-    {
-        text: 'Отзывы',
-        link: '/reviews',
-    },
-    {
-        text: 'Для покупателей',
-        link: '/forBuyers',
-    },
-];
+import { navs } from '../../constants/navLinks.ts';
+
 const Nav = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const toggleDropdown = () => {
