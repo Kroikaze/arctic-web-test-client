@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { navs } from '../../constants/navLinks.ts';
+import arrow from '@/assets/Images/Arrow.png';
+import { navs } from '@/constants/navLinks.ts';
 
 const Nav = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -14,14 +15,28 @@ const Nav = () => {
                 {navs.map((nav, index) => {
                     if (nav.link === undefined) {
                         return (
-                            <div key={index} className="relative">
-                                <button onClick={toggleDropdown} className="font-semibold">
+                            <div
+                                key={index}
+                                className="relative"
+                                onMouseEnter={() => setDropdownOpen(true)}
+                                onMouseLeave={() => setDropdownOpen(false)}
+                            >
+                                <button
+                                    onClick={toggleDropdown}
+                                    className="font-semibold flex items-center"
+                                >
                                     {nav.text}
-                                    <span className="pl-2">{isDropdownOpen ? '∧' : '∨'}</span>
+                                    <img
+                                        src={arrow}
+                                        alt="arrow"
+                                        className={`w-2 h-1 ml-2 duration-500 opacity-100 ${
+                                            isDropdownOpen ? 'rotate-180' : 'rotate-0'
+                                        }`}
+                                    />
                                 </button>
                                 {isDropdownOpen && (
-                                    <div className="absolute -left-6 w-36 mt-6 bg-custom_broun">
-                                        <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 rotate-45 w-4 h-4 bg-custom_broun"></div>
+                                    <div className="absolute -left-6 w-36 mt-6 bg-custom_brown">
+                                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-custom_brown"></div>
 
                                         <Link
                                             to="/watches/women"
@@ -37,6 +52,7 @@ const Nav = () => {
                                         </Link>
                                     </div>
                                 )}
+                                <div className="absolute -left-6 -right-14 h-6"></div>
                             </div>
                         );
                     }
