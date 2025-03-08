@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
@@ -6,9 +6,29 @@ import { navs } from '@/constants/navLinks.ts';
 
 const Nav = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside as unknown as EventListener);
+
+        return () => {
+            document.removeEventListener(
+                'mousedown',
+                handleClickOutside as unknown as EventListener,
+            );
+        };
+    }, []);
+
     return (
         <nav className="bg-gray-100">
             <div className="container mx-auto flex justify-center gap-1">
@@ -19,7 +39,7 @@ const Nav = () => {
                                 key={nav.text}
                                 className="relative uppercase mx-3 py-6 cursor-pointer group"
                                 onMouseEnter={() => setDropdownOpen(true)}
-                                onMouseLeave={() => setDropdownOpen(false)}
+                                ref={dropdownRef}
                             >
                                 <div
                                     onClick={toggleDropdown}
@@ -35,7 +55,7 @@ const Nav = () => {
                                     />
                                 </div>
                                 {isDropdownOpen && (
-                                    <div className="absolute -left-6 w-36 mt-6 bg-custom_brown transition-all duration-300 ease-in-out animate-fade-in">
+                                    <div className="absolute -left-6 w-36 mt-6 bg-custom_brown animate-fade-in">
                                         <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-custom_brown"></div>
 
                                         <Link
