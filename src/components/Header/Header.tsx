@@ -6,7 +6,7 @@ import ShoppingCart from './ShoppingCart.tsx';
 const Header = () => {
     return (
         <header className="bg-white">
-            <div className="container mx-auto flex justify-between items-center py-4 px-6">
+            <div className="container mx-auto flex justify-between items-center px-6 py-4">
                 <ShoppingCart />
                 <Logo />
                 <CallBack />
