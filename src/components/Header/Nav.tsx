@@ -1,18 +1,15 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
 import useClickOutside from '@/components/hooks/useClickOutside.ts';
+import useDropdown from '@/components/hooks/useDropdown.ts';
 import { navs } from '@/constants/navLinks.ts';
 
 const Nav = () => {
-    const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
-
-    const toggleDropdown = () => {
-        setDropdownOpen(!isDropdownOpen);
-    };
-    useClickOutside(dropdownRef, () => setDropdownOpen(false));
+    const { isDropdownOpen, openDropdown, closeDropdown, toggleDropdown } = useDropdown();
+    useClickOutside(dropdownRef, closeDropdown);
 
     return (
         <nav className="bg-gray-100">
@@ -23,7 +20,7 @@ const Nav = () => {
                             <div
                                 key={nav.text}
                                 className="relative uppercase mx-3 py-6 cursor-pointer group"
-                                onMouseEnter={() => setDropdownOpen(true)}
+                                onMouseEnter={openDropdown}
                                 ref={dropdownRef}
                             >
                                 <div
