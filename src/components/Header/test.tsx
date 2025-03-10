@@ -9,10 +9,12 @@ const Nav = () => {
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
+    // Використовуємо хук для обробки кліків поза елементом
+    useClickOutside(dropdownRef, () => setDropdownOpen(false));
+
     const toggleDropdown = () => {
         setDropdownOpen(!isDropdownOpen);
     };
-    useClickOutside(dropdownRef, () => setDropdownOpen(false));
 
     return (
         <nav className="bg-gray-100">
