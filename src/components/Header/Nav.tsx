@@ -19,7 +19,7 @@ const Nav = () => {
                         return (
                             <div
                                 key={nav.text}
-                                className="relative uppercase mx-3 py-6 cursor-pointer group"
+                                className="relative uppercase mx-3 py-6 cursor-pointer"
                                 onMouseEnter={openDropdown}
                                 ref={dropdownRef}
                             >
@@ -31,14 +31,14 @@ const Nav = () => {
                                     <img
                                         src={arrow}
                                         alt="arrow"
-                                        className={`w-2 h-1 ml-2 duration-200 ${
+                                        className={`w-2 h-1 ml-2 duration-150 ${
                                             isDropdownOpen ? 'rotate-0' : 'rotate-180'
                                         }`}
                                     />
                                 </div>
                                 {isDropdownOpen && (
-                                    <div className="absolute -left-6 w-36 mt-6 bg-custom_brown animate-fade-in">
-                                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-custom_brown"></div>
+                                    <div className="absolute -left-6 w-36 mt-6 bg-latte animate-fade-in">
+                                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-latte"></div>
 
                                         <Link
                                             to="/watches/women"

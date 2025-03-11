@@ -1,0 +1,8 @@
+@import '@fontsource/inter';
+@import 'tailwindcss';
+@import './colors.css';
+@import './animate.css';
+
+body {
+    font-family: 'Inter', sans-serif;
+}
