@@ -1,17 +1,35 @@
-import { useRef } from 'react';
-
-import useClickOutside from '@/components/hooks/useClickOutside.ts';
-import useDropdown from '@/components/hooks/useDropdown.ts';
+import { FC, useEffect, useRef, useState } from 'react';
 
 import CallBackPopup from './RequestCallPopUp.tsx';
 
-const RequestCall = () => {
+const RequestCall: FC = () => {
+    const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    const { isDropdownOpen, openDropdown, closeDropdown } = useDropdown();
-    useClickOutside(dropdownRef, () => {
-        closeDropdown();
-    });
+    const handleOpenDropdown = () => {
+        setDropdownOpen(true);
+    };
+
+    const closeDropdown = () => {
+        setDropdownOpen(false);
+    };
+
+    useEffect(() => {
+        console.log('start');
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                closeDropdown();
+                console.log('ClickOutside click outside event Request');
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            console.log('remove click outside event Request');
+        };
+    }, [dropdownRef, closeDropdown]);
 
     return (
         <div className="flex flex-col text-center relative">
@@ -21,7 +39,7 @@ const RequestCall = () => {
 
             <span
                 className="text-sm underline text-latte pb-3 cursor-pointer"
-                onMouseEnter={openDropdown}
+                onMouseEnter={handleOpenDropdown}
             >
                 Заказать обратный звонок
             </span>

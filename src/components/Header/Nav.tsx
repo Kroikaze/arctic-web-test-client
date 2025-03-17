@@ -1,15 +1,41 @@
-import { useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
-import useClickOutside from '@/components/hooks/useClickOutside.ts';
-import useDropdown from '@/components/hooks/useDropdown.ts';
 import { navs } from '@/constants/navLinks.ts';
 
-const Nav = () => {
+const Nav: FC = () => {
+    const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+
     const dropdownRef = useRef<HTMLDivElement>(null);
-    const { isDropdownOpen, openDropdown, closeDropdown, toggleDropdown } = useDropdown();
-    useClickOutside(dropdownRef, closeDropdown);
+
+    const handleOpenDropdown = () => {
+        setDropdownOpen(true);
+    };
+
+    const closeDropdown = () => {
+        setDropdownOpen(false);
+    };
+
+    const handleToggleDropdown = () => {
+        setDropdownOpen(prevState => !prevState);
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                closeDropdown();
+                console.log('ClickOutside click outside event');
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            console.log('remove click outside event');
+        };
+    }, [dropdownRef, closeDropdown]);
 
     return (
         <nav className="bg-gray-100">
@@ -20,11 +46,11 @@ const Nav = () => {
                             <div
                                 key={nav.text}
                                 className="relative uppercase mx-3 py-6 cursor-pointer"
-                                onMouseEnter={openDropdown}
+                                onMouseEnter={handleOpenDropdown}
                                 ref={dropdownRef}
                             >
                                 <div
-                                    onClick={toggleDropdown}
+                                    onClick={handleToggleDropdown}
                                     className="font-semibold flex items-center"
                                 >
                                     {nav.text}
