@@ -1,7 +1,8 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
+import NavDropdown from '@/components/Header/NavDropdown.tsx';
 import { navs } from '@/constants/navLinks.ts';
 
 const Nav: FC = () => {
@@ -10,6 +11,7 @@ const Nav: FC = () => {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleOpenDropdown = () => {
+        // console.log('handleOpenDropdown');
         setDropdownOpen(true);
     };
 
@@ -18,24 +20,9 @@ const Nav: FC = () => {
     };
 
     const handleToggleDropdown = () => {
+        // console.log('handleToggleDropdown');
         setDropdownOpen(prevState => !prevState);
     };
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                closeDropdown();
-                console.log('ClickOutside click outside event');
-            }
-        };
-
-        document.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            console.log('remove click outside event');
-        };
-    }, [dropdownRef, closeDropdown]);
 
     return (
         <nav className="bg-gray-100">
@@ -62,24 +49,7 @@ const Nav: FC = () => {
                                         }`}
                                     />
                                 </div>
-                                {isDropdownOpen && (
-                                    <div className="absolute -left-6 w-36 mt-6 bg-latte animate-fade-in">
-                                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-latte"></div>
-
-                                        <Link
-                                            to="/watches/women"
-                                            className="block capitalize px-4 py-2 text-sm text-white"
-                                        >
-                                            Женские часы
-                                        </Link>
-                                        <Link
-                                            to="/watches/men"
-                                            className="block capitalize px-4 py-2 text-sm text-white"
-                                        >
-                                            Мужские часы
-                                        </Link>
-                                    </div>
-                                )}
+                                {isDropdownOpen && <NavDropdown />}
                             </div>
                         );
                     }
