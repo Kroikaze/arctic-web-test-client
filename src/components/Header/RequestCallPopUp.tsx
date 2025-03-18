@@ -7,9 +7,9 @@ interface CallBackPopupProps {
 }
 
 const CallBackPopup: React.FC<CallBackPopupProps> = ({ isOpen, dropdownRef }) => {
-    const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [name, setName] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

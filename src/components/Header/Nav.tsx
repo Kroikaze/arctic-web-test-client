@@ -7,11 +7,9 @@ import { navs } from '@/constants/navLinks.ts';
 
 const Nav: FC = () => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
-
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const handleOpenDropdown = () => {
-        // console.log('handleOpenDropdown');
         setDropdownOpen(true);
     };
 
@@ -20,7 +18,6 @@ const Nav: FC = () => {
     };
 
     const handleToggleDropdown = () => {
-        // console.log('handleToggleDropdown');
         setDropdownOpen(prevState => !prevState);
     };
 
@@ -34,7 +31,6 @@ const Nav: FC = () => {
                                 key={nav.text}
                                 className="relative uppercase mx-3 py-6 cursor-pointer"
                                 onMouseEnter={handleOpenDropdown}
-                                ref={dropdownRef}
                             >
                                 <div
                                     onClick={handleToggleDropdown}
@@ -49,7 +45,12 @@ const Nav: FC = () => {
                                         }`}
                                     />
                                 </div>
-                                {isDropdownOpen && <NavDropdown />}
+                                {isDropdownOpen && (
+                                    <NavDropdown
+                                        dropdownRef={dropdownRef}
+                                        callback={closeDropdown}
+                                    />
+                                )}
                             </div>
                         );
                     }

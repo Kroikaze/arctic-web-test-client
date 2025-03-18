@@ -16,20 +16,22 @@ const RequestCall: FC = () => {
     };
 
     useEffect(() => {
-        console.log('start');
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                closeDropdown();
-                console.log('ClickOutside click outside event Request');
-            }
-        };
+        if (isDropdownOpen) {
+            console.log('start');
+            const handleClickOutside = (event: MouseEvent) => {
+                if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                    closeDropdown();
+                    console.log('ClickOutside click outside event Request');
+                }
+            };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-            console.log('remove click outside event Request');
-        };
-    }, [dropdownRef, closeDropdown]);
+            document.addEventListener('mousedown', handleClickOutside);
+            return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+                console.log('remove click outside event Request');
+            };
+        }
+    }, [isDropdownOpen, dropdownRef, closeDropdown]);
 
     return (
         <div className="flex flex-col text-center relative">
@@ -44,11 +46,13 @@ const RequestCall: FC = () => {
                 Заказать обратный звонок
             </span>
 
-            <CallBackPopup
-                isOpen={isDropdownOpen}
-                onClose={closeDropdown}
-                dropdownRef={dropdownRef}
-            />
+            {isDropdownOpen && (
+                <CallBackPopup
+                    isOpen={isDropdownOpen}
+                    onClose={closeDropdown}
+                    dropdownRef={dropdownRef}
+                />
+            )}
         </div>
     );
 };
