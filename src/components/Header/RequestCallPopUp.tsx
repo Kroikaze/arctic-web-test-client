@@ -6,7 +6,7 @@ interface CallBackPopupProps {
     dropdownRef: React.RefObject<HTMLDivElement | null>;
 }
 
-const CallBackPopup: React.FC<CallBackPopupProps> = ({ isOpen, dropdownRef }) => {
+const CallBackPopup: React.FC<CallBackPopupProps> = ({ onClose, isOpen, dropdownRef }) => {
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -15,6 +15,9 @@ const CallBackPopup: React.FC<CallBackPopupProps> = ({ isOpen, dropdownRef }) =>
         e.preventDefault();
         console.log('Data:', { name, phone });
         setIsSubmitted(true);
+        setTimeout(() => {
+            onClose();
+        }, 2000);
     };
 
     if (!isOpen) return null;
