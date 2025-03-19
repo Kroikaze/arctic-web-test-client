@@ -1,11 +1,12 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 
-import CallBackPopup from './RequestCallPopUp.tsx';
+import PopUp from './PopUp.tsx';
 
 const RequestCall: FC = () => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
-
-    const dropdownRef = useRef<HTMLDivElement>(null);
+    const [name, setName] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const handleOpenDropdown = () => {
         setDropdownOpen(true);
@@ -15,23 +16,22 @@ const RequestCall: FC = () => {
         setDropdownOpen(false);
     };
 
-    useEffect(() => {
-        if (isDropdownOpen) {
-            console.log('start');
-            const handleClickOutside = (event: MouseEvent) => {
-                if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                    closeDropdown();
-                    console.log('ClickOutside click outside event Request');
-                }
-            };
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        console.log('Data:', { name, phone });
+        setIsSubmitted(true);
+        setTimeout(() => {
+            closeDropdown();
+        }, 2000);
+    };
 
-            document.addEventListener('mousedown', handleClickOutside);
-            return () => {
-                document.removeEventListener('mousedown', handleClickOutside);
-                console.log('remove click outside event Request');
-            };
-        }
-    }, [isDropdownOpen, dropdownRef, closeDropdown]);
+    const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+        setName(e.target.value);
+    };
+
+    const handleChangePhone = (e: ChangeEvent<HTMLInputElement>) => {
+        setPhone(e.target.value);
+    };
 
     return (
         <div className="flex flex-col text-center relative">
@@ -46,7 +46,42 @@ const RequestCall: FC = () => {
                 Заказать обратный звонок
             </span>
 
-            {isDropdownOpen && <CallBackPopup onClose={closeDropdown} dropdownRef={dropdownRef} />}
+            {isDropdownOpen && (
+                <PopUp callback={closeDropdown}>
+                    <div className="absolute top-full mt-2 bg-white border border-gray-200 p-4 w-64">
+                        {isSubmitted ? (
+                            <p className="text-sm">
+                                Наш специалист свяжется с вами в ближайшее время.
+                            </p>
+                        ) : (
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    placeholder="Ваше имя"
+                                    value={name}
+                                    onChange={handleChangeName}
+                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    required
+                                />
+                                <input
+                                    type="tel"
+                                    placeholder="Номер телефона"
+                                    value={phone}
+                                    onChange={handleChangePhone}
+                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    required
+                                />
+                                <button
+                                    type="submit"
+                                    className="w-full bg-latte text-white py-2 rounded-lg"
+                                >
+                                    Отправить
+                                </button>
+                            </form>
+                        )}
+                    </div>
+                </PopUp>
+            )}
         </div>
     );
 };
