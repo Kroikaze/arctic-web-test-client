@@ -46,13 +46,7 @@ const RequestCall: FC = () => {
                 Заказать обратный звонок
             </span>
 
-            {isDropdownOpen && (
-                <CallBackPopup
-                    isOpen={isDropdownOpen}
-                    onClose={closeDropdown}
-                    dropdownRef={dropdownRef}
-                />
-            )}
+            {isDropdownOpen && <CallBackPopup onClose={closeDropdown} dropdownRef={dropdownRef} />}
         </div>
     );
 };
