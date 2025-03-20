@@ -22,6 +22,9 @@ const RequestCall: FC = () => {
         setIsSubmitted(true);
         setTimeout(() => {
             closeDropdown();
+            setName('');
+            setPhone('');
+            setIsSubmitted(false);
         }, 2000);
     };
 

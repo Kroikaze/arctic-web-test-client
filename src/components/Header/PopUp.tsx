@@ -22,7 +22,7 @@ const PopUp: FC<NavDropdownProps> = ({ children, callback }) => {
             console.log('remove nav');
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [dropdownRef, callback]);
+    }, []);
 
     return <div ref={dropdownRef}>{children}</div>;
 };

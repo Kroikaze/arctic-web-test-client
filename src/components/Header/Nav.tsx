@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
+import DropdownMenu from '@/components/Header/DropdownMenu.tsx';
 import PopUp from '@/components/Header/PopUp.tsx';
 import { navs } from '@/constants/navLinks.ts';
 
@@ -46,22 +47,13 @@ const Nav: FC = () => {
                                 </div>
                                 {isDropdownOpen && (
                                     <PopUp callback={closeDropdown}>
-                                        <div className="absolute -left-6 w-36 mt-6 bg-latte animate-fade-in">
-                                            <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-latte"></div>
-
-                                            <Link
-                                                to="/watches/women"
-                                                className="block capitalize px-4 py-2 text-sm text-white"
-                                            >
-                                                Женские часы
-                                            </Link>
-                                            <Link
-                                                to="/watches/men"
-                                                className="block capitalize px-4 py-2 text-sm text-white"
-                                            >
-                                                Мужские часы
-                                            </Link>
-                                        </div>
+                                        <DropdownMenu
+                                            items={[
+                                                { text: 'Женские часы', link: '/watches/women' },
+                                                { text: 'Мужские часы', link: '/watches/men' },
+                                            ]}
+                                            callback={closeDropdown}
+                                        />
                                     </PopUp>
                                 )}
                             </div>
