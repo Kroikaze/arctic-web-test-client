@@ -5,7 +5,7 @@ interface NavDropdownProps {
     children: ReactNode;
 }
 
-const PopUp: FC<NavDropdownProps> = ({ children, callback }) => {
+const DropdownWrapper: FC<NavDropdownProps> = ({ children, callback }) => {
     const dropdownRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         console.log('start Nav');
@@ -27,4 +27,4 @@ const PopUp: FC<NavDropdownProps> = ({ children, callback }) => {
     return <div ref={dropdownRef}>{children}</div>;
 };
 
-export default PopUp;
+export default DropdownWrapper;

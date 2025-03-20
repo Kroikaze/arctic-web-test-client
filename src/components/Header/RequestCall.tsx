@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react';
 
-import PopUp from './PopUp.tsx';
+import DropdownWrapper from './DropdownWrapper.tsx';
 
 const RequestCall: FC = () => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
@@ -50,7 +50,7 @@ const RequestCall: FC = () => {
             </span>
 
             {isDropdownOpen && (
-                <PopUp callback={closeDropdown}>
+                <DropdownWrapper callback={closeDropdown}>
                     <div className="absolute top-full mt-2 bg-white border border-gray-200 p-4 w-64">
                         {isSubmitted ? (
                             <p className="text-sm">
@@ -83,7 +83,7 @@ const RequestCall: FC = () => {
                             </form>
                         )}
                     </div>
-                </PopUp>
+                </DropdownWrapper>
             )}
         </div>
     );

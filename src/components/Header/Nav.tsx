@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
 import DropdownMenu from '@/components/Header/DropdownMenu.tsx';
-import PopUp from '@/components/Header/PopUp.tsx';
+import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import { navs } from '@/constants/navLinks.ts';
 
 const Nav: FC = () => {
@@ -46,7 +46,7 @@ const Nav: FC = () => {
                                     />
                                 </div>
                                 {isDropdownOpen && (
-                                    <PopUp callback={closeDropdown}>
+                                    <DropdownWrapper callback={closeDropdown}>
                                         <DropdownMenu
                                             items={[
                                                 { text: 'Женские часы', link: '/watches/women' },
@@ -54,7 +54,7 @@ const Nav: FC = () => {
                                             ]}
                                             callback={closeDropdown}
                                         />
-                                    </PopUp>
+                                    </DropdownWrapper>
                                 )}
                             </div>
                         );
