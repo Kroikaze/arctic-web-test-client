@@ -25,7 +25,7 @@ const RequestCall: FC = () => {
             setName('');
             setPhone('');
             setIsSubmitted(false);
-        }, 2000);
+        }, 1500);
     };
 
     const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
