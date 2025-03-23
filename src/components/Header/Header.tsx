@@ -14,7 +14,7 @@ const Header = () => {
 
     return (
         <header className="bg-white">
-            <div className="container mx-auto flex justify-between items-center px-6 py-4">
+            <div className="mx-auto flex justify-between items-center px-6 py-4">
                 <div className="order-1 block xl:hidden">
                     <button onClick={toggleMobileMenu} className="text-2xl">
                         ☰
