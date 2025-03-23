@@ -15,23 +15,26 @@ const Header = () => {
     return (
         <header className="bg-white">
             <div className="container mx-auto flex justify-between items-center px-6 py-4">
-                <div className="block md:hidden">
+                <div className="order-1 block xl:hidden">
                     <button onClick={toggleMobileMenu} className="text-2xl">
                         ☰
                     </button>
                 </div>
 
-                <div className="flex-1 text-center md:text-left">
+                <div className="order-3 lg:order-2">
+                    <ShoppingCart />
+                </div>
+
+                <div className="order-2 lg:order-3 flex-1">
                     <Logo />
                 </div>
 
-                <div className="hidden md:flex items-center space-x-4">
-                    <ShoppingCart />
+                <div className="order-4 hidden lg:block">
                     <RequestCall />
                 </div>
             </div>
 
-            <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:block`}>
+            <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} xl:block`}>
                 <Nav />
             </div>
         </header>
