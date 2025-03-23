@@ -34,7 +34,7 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} xl:block`}>
+            <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} xl:block w-fit`}>
                 <Nav />
             </div>
         </header>
