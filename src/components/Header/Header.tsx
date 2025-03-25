@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <header className="bg-white">
             <div className="mx-auto flex justify-between items-center px-6 py-4">
-                <div className="order-1 block xl:hidden">
+                <div className="order-1 hidden lg:block">
                     <button onClick={toggleMobileMenu} className="text-2xl">
                         ☰
                     </button>
@@ -29,12 +29,12 @@ const Header = () => {
                     <Logo />
                 </div>
 
-                <div className="order-4 hidden lg:block">
+                <div className="order-4 hidden tablet-lg:block">
                     <RequestCall />
                 </div>
             </div>
 
-            <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} xl:block w-fit`}>
+            <div className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} xl:block`}>
                 <Nav />
             </div>
         </header>

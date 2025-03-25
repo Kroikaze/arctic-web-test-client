@@ -1,0 +1,19 @@
+@theme {
+    --breakpoint-desktop-lg: 2560px;
+    --breakpoint-desktop: 1920px;
+    --breakpoint-laptop-lg: 1536px;
+    --breakpoint-laptop-md: 1440px;
+    --breakpoint-laptop-sm: 1366px;
+
+    --breakpoint-tablet-xl: 1280px;
+    --breakpoint-tablet-lg: 1024px;
+    --breakpoint-tablet-md: 810px;
+    --breakpoint-tablet-sm: 768px;
+
+    --breakpoint-mobile-2xl: 428px;
+    --breakpoint-mobile-xl: 414px;
+    --breakpoint-mobile-lg: 412px;
+    --breakpoint-mobile-md: 390px;
+    --breakpoint-mobile-sm: 375px;
+    --breakpoint-mobile-xs: 360px;
+}

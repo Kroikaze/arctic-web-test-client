@@ -2,6 +2,7 @@
 @import 'tailwindcss';
 @import './colors.css';
 @import './animate.css';
+@import './screen-breakpoints.css';
 
 body {
     font-family: 'Inter', sans-serif;
