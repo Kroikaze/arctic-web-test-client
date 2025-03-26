@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import Logo from './Logo.tsx';
 import Nav from './Nav.tsx';
 import RequestCall from './RequestCall.tsx';
 import ShoppingCart from './ShoppingCart.tsx';
 
-const Header = () => {
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+const Header: FC = () => {
+    const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);

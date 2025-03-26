@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import arrow from '@/assets/Images/Arrow.png';
 import DropdownMenu from '@/components/Header/DropdownMenu.tsx';
 import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
+import RequestCall from '@/components/Header/RequestCall.tsx';
 import { navs } from '@/constants/navLinks.ts';
 
 const Nav: FC = () => {
@@ -69,6 +70,9 @@ const Nav: FC = () => {
                         </Link>
                     );
                 })}
+                <div className="mx-3 py-6 border-t border-gray-800">
+                    <RequestCall />
+                </div>
             </div>
         </nav>
     );
