@@ -24,7 +24,7 @@ const Nav: FC = () => {
 
     return (
         <nav className="bg-gray-100">
-            <div className="flex flex-col items-start gap-1">
+            <div className="flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-between">
                 {navs.map(nav => {
                     if (nav.link === undefined) {
                         return (
@@ -70,7 +70,7 @@ const Nav: FC = () => {
                         </Link>
                     );
                 })}
-                <div className="mx-3 py-6 border-t border-gray-800">
+                <div className="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden">
                     <RequestCall />
                 </div>
             </div>

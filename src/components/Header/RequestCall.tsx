@@ -37,7 +37,7 @@ const RequestCall: FC = () => {
     };
 
     return (
-        <div className="flex flex-col text-center relative">
+        <div className=" flex flex-col text-center relative">
             <a href="tel:88003027915" className="font-semibold text-2xl">
                 8 (800) 302 79 15
             </a>

@@ -15,26 +15,19 @@ const Header: FC = () => {
     return (
         <header className="bg-white">
             <div className="mx-auto flex justify-between items-center px-6 py-4">
-                <div className="">
+                <div className="laptop-sm:hidden">
                     <button onClick={toggleMobileMenu} className="text-2xl">
                         ☰
                     </button>
                 </div>
-
-                <div className="">
-                    <Logo />
-                </div>
-
+                <Logo />
                 <div className="hidden">
                     <RequestCall />
                 </div>
-
-                <div className="">
-                    <ShoppingCart />
-                </div>
+                <ShoppingCart />
             </div>
 
-            <div className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} `}>
+            <div className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} laptop-sm:block`}>
                 <Nav />
             </div>
         </header>
