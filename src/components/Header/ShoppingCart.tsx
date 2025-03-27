@@ -2,7 +2,7 @@ import ShoppingBag from '@/assets/Images/Shopping_bag.png';
 
 const ShoppingCart = () => {
     return (
-        <div className="flex items-center laptop-sm:order-[-1]">
+        <div className="flex items-center laptop-sm:order-first">
             <img src={ShoppingBag} alt="Корзина" className="mr-2 w-6 h-6" />
             <div className="flex flex-col max-tablet-sm:hidden">
                 <span className="text-xs">Корзина(5):</span>

@@ -14,12 +14,10 @@ const Header: FC = () => {
 
     return (
         <header className="bg-white">
-            <div className="mx-auto flex justify-between items-center px-6 py-4">
-                <div className="laptop-sm:hidden">
-                    <button onClick={toggleMobileMenu} className="text-2xl">
-                        ☰
-                    </button>
-                </div>
+            <div className="container mx-auto flex justify-between items-center px-6 py-4">
+                <button onClick={toggleMobileMenu} className="text-2xl laptop-sm:hidden">
+                    ☰
+                </button>
                 <Logo />
                 <div className="hidden laptop-sm:block">
                     <RequestCall />
@@ -27,7 +25,9 @@ const Header: FC = () => {
                 <ShoppingCart />
             </div>
 
-            <div className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} laptop-sm:block`}>
+            <div
+                className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} laptop-sm:block laptop-sm:w-full`}
+            >
                 <Nav />
             </div>
         </header>
