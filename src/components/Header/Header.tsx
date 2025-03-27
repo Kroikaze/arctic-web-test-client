@@ -21,7 +21,7 @@ const Header: FC = () => {
                     </button>
                 </div>
                 <Logo />
-                <div className="hidden">
+                <div className="hidden laptop-sm:block">
                     <RequestCall />
                 </div>
                 <ShoppingCart />

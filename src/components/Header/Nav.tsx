@@ -24,7 +24,7 @@ const Nav: FC = () => {
 
     return (
         <nav className="bg-gray-100">
-            <div className="flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-between">
+            <div className="flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-center">
                 {navs.map(nav => {
                     if (nav.link === undefined) {
                         return (
