@@ -51,7 +51,7 @@ const RequestCall: FC = () => {
 
             {isDropdownOpen && (
                 <DropdownWrapper callback={closeDropdown}>
-                    <div className="absolute bottom-full mt-2 bg-white border border-gray-200 p-4 w-64 laptop-lg:right-0 laptop-sm:top-full">
+                    <div className="absolute bottom-full mb-2 bg-white border border-gray-200 p-4 w-64 laptop-sm:bottom-auto laptop-sm:right-0 laptop-sm:top-full laptop-sm:mt-2">
                         {isSubmitted ? (
                             <p className="text-sm">
                                 Наш специалист свяжется с вами в ближайшее время.
