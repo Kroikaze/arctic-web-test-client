@@ -23,55 +23,60 @@ const Nav: FC = () => {
     };
 
     return (
-        <nav className="bg-gray-100">
-            <div className="flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-center">
-                {navs.map(nav => {
-                    if (nav.link === undefined) {
-                        return (
-                            <div
-                                key={nav.text}
-                                className="relative uppercase mx-3 py-6 cursor-pointer"
-                                onMouseEnter={handleOpenDropdown}
-                            >
+        <nav className="bg-gray-100 mx-[calc(50%-50vw)] w-screen">
+            <div className="container mx-auto px-6">
+                <div className="flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-between">
+                    {navs.map(nav => {
+                        if (nav.link === undefined) {
+                            return (
                                 <div
-                                    onClick={handleToggleDropdown}
-                                    className="font-semibold flex items-center"
+                                    key={nav.text}
+                                    className="relative uppercase mx-3 py-6 cursor-pointer"
+                                    onMouseEnter={handleOpenDropdown}
                                 >
-                                    {nav.text}
-                                    <img
-                                        src={arrow}
-                                        alt="arrow"
-                                        className={`w-2 h-1 ml-2 duration-150 ${
-                                            isDropdownOpen ? 'rotate-0' : 'rotate-180'
-                                        }`}
-                                    />
-                                </div>
-                                {isDropdownOpen && (
-                                    <DropdownWrapper callback={closeDropdown}>
-                                        <DropdownMenu
-                                            items={[
-                                                { text: 'Женские часы', link: '/watches/women' },
-                                                { text: 'Мужские часы', link: '/watches/men' },
-                                            ]}
-                                            callback={closeDropdown}
+                                    <div
+                                        onClick={handleToggleDropdown}
+                                        className="font-semibold flex items-center"
+                                    >
+                                        {nav.text}
+                                        <img
+                                            src={arrow}
+                                            alt="arrow"
+                                            className={`w-2 h-1 ml-2 duration-150 ${
+                                                isDropdownOpen ? 'rotate-0' : 'rotate-180'
+                                            }`}
                                         />
-                                    </DropdownWrapper>
-                                )}
-                            </div>
+                                    </div>
+                                    {isDropdownOpen && (
+                                        <DropdownWrapper callback={closeDropdown}>
+                                            <DropdownMenu
+                                                items={[
+                                                    {
+                                                        text: 'Женские часы',
+                                                        link: '/watches/women',
+                                                    },
+                                                    { text: 'Мужские часы', link: '/watches/men' },
+                                                ]}
+                                                callback={closeDropdown}
+                                            />
+                                        </DropdownWrapper>
+                                    )}
+                                </div>
+                            );
+                        }
+                        return (
+                            <Link
+                                key={nav.text}
+                                to={nav.link}
+                                className="font-semibold uppercase mx-3 py-6"
+                            >
+                                {nav.text}
+                            </Link>
                         );
-                    }
-                    return (
-                        <Link
-                            key={nav.text}
-                            to={nav.link}
-                            className="font-semibold uppercase mx-3 py-6"
-                        >
-                            {nav.text}
-                        </Link>
-                    );
-                })}
-                <div className="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden">
-                    <RequestCall />
+                    })}
+                    <div className="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden">
+                        <RequestCall />
+                    </div>
                 </div>
             </div>
         </nav>
