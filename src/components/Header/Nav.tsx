@@ -7,7 +7,11 @@ import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import RequestCall from '@/components/Header/RequestCall.tsx';
 import { navs } from '@/constants/navLinks.ts';
 
-const Nav: FC = () => {
+interface NavProps {
+    isMobileOpen?: boolean;
+}
+
+const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
     const handleOpenDropdown = () => {
@@ -23,7 +27,13 @@ const Nav: FC = () => {
     };
 
     return (
-        <nav className="bg-gray-100 w-full">
+        <nav
+            className={`
+                ${isMobileOpen ? 'block w-fit' : 'hidden'} 
+                laptop-sm:block laptop-sm:w-full 
+                bg-gray-100
+                `}
+        >
             <div className="container mx-auto px-6 flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-between">
                 {navs.map(nav => {
                     if (nav.link === undefined) {
@@ -73,7 +83,9 @@ const Nav: FC = () => {
                         </Link>
                     );
                 })}
-                <RequestCall externalClasses="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden" />
+                {isMobileOpen && (
+                    <RequestCall externalClasses="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden" />
+                )}
             </div>
         </nav>
     );

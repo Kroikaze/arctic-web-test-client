@@ -19,15 +19,10 @@ const Header: FC = () => {
                     ☰
                 </button>
                 <Logo />
-                <RequestCall externalClasses="hidden laptop-sm:block" />
+                <RequestCall externalClasses="hidden laptop-sm:flex" />
                 <ShoppingCart />
             </div>
-
-            <div
-                className={`${isMobileMenuOpen ? 'block w-fit' : 'hidden'} laptop-sm:block laptop-sm:w-full`}
-            >
-                <Nav />
-            </div>
+            <Nav isMobileOpen={isMobileMenuOpen} />
         </header>
     );
 };
