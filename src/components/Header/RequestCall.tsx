@@ -2,7 +2,11 @@ import { ChangeEvent, FC, FormEvent, useState } from 'react';
 
 import DropdownWrapper from './DropdownWrapper.tsx';
 
-const RequestCall: FC = () => {
+interface RequestCallProps {
+    externalClasses?: string;
+}
+
+const RequestCall: FC<RequestCallProps> = ({ externalClasses = '' }) => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
@@ -37,7 +41,7 @@ const RequestCall: FC = () => {
     };
 
     return (
-        <div className=" flex flex-col text-center relative">
+        <div className="flex flex-col text-center relative ${externalClasses}">
             <a href="tel:88003027915" className="font-semibold text-2xl">
                 8 (800) 302 79 15
             </a>

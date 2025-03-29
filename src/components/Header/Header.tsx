@@ -19,9 +19,7 @@ const Header: FC = () => {
                     ☰
                 </button>
                 <Logo />
-                <div className="hidden laptop-sm:block">
-                    <RequestCall />
-                </div>
+                <RequestCall externalClasses="hidden laptop-sm:block" />
                 <ShoppingCart />
             </div>
 
