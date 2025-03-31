@@ -6,7 +6,7 @@ interface RequestCallProps {
     externalClasses?: string;
 }
 
-const RequestCall: FC<RequestCallProps> = ({ externalClasses = '' }) => {
+const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
@@ -41,7 +41,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = '' }) => {
     };
 
     return (
-        <div className={`flex flex-col text-center relative ${externalClasses}`}>
+        <div className={`flex-col text-center relative ${externalClasses}`}>
             <a href="tel:88003027915" className="font-semibold text-2xl">
                 8 (800) 302 79 15
             </a>
@@ -55,7 +55,14 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = '' }) => {
 
             {isDropdownOpen && (
                 <DropdownWrapper callback={closeDropdown}>
-                    <div className="absolute bottom-full mb-2 bg-white border border-gray-200 p-4 w-64 laptop-sm:bottom-auto laptop-sm:right-0 laptop-sm:top-full laptop-sm:mt-2">
+                    <div
+                        className="
+                            absolute bottom-full mb-2 bg-white border border-gray-200 p-4 w-64
+                            laptop-sm:bottom-auto
+                            laptop-sm:right-0
+                            laptop-sm:top-full
+                            laptop-sm:mt-2"
+                    >
                         {isSubmitted ? (
                             <p className="text-sm">
                                 Наш специалист свяжется с вами в ближайшее время.

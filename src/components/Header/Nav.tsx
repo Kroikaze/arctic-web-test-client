@@ -6,6 +6,7 @@ import DropdownMenu from '@/components/Header/DropdownMenu.tsx';
 import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import RequestCall from '@/components/Header/RequestCall.tsx';
 import { navs } from '@/constants/navLinks.ts';
+import useScreenSize from '@/hooks/useScreenSize.ts';
 
 interface NavProps {
     isMobileOpen?: boolean;
@@ -13,6 +14,7 @@ interface NavProps {
 
 const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+    const { isLaptopSm } = useScreenSize();
 
     const handleOpenDropdown = () => {
         setDropdownOpen(true);
@@ -34,7 +36,12 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                 bg-gray-100
                 `}
         >
-            <div className="container mx-auto px-6 flex flex-col laptop-sm:flex-row items-start laptop-sm:items-center gap-1 laptop-sm:justify-between">
+            <div
+                className="container mx-auto px-6 flex flex-col items-start  gap-1
+                    laptop-sm:flex-row
+                    laptop-sm:items-center
+                    laptop-sm:justify-between"
+            >
                 {navs.map(nav => {
                     if (nav.link === undefined) {
                         return (
@@ -60,10 +67,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                     <DropdownWrapper callback={closeDropdown}>
                                         <DropdownMenu
                                             items={[
-                                                {
-                                                    text: 'Женские часы',
-                                                    link: '/watches/women',
-                                                },
+                                                { text: 'Женские часы', link: '/watches/women' },
                                                 { text: 'Мужские часы', link: '/watches/men' },
                                             ]}
                                             callback={closeDropdown}
@@ -83,8 +87,8 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         </Link>
                     );
                 })}
-                {isMobileOpen && (
-                    <RequestCall externalClasses="mx-3 py-6 border-t border-gray-800 laptop-sm:hidden" />
+                {isMobileOpen && !isLaptopSm && (
+                    <RequestCall externalClasses="flex mx-3 py-6 border-t border-gray-800" />
                 )}
             </div>
         </nav>
