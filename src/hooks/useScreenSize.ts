@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 const useScreenSize = () => {
     const [isLaptopSm, setIsLaptopSm] = useState(false);
-    console.log('useScreenSize');
 
     useEffect(() => {
         const checkScreenSize = () => {
