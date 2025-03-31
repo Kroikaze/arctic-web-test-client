@@ -37,7 +37,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                 `}
         >
             <div
-                className="container mx-auto px-6 flex flex-col items-start  gap-1
+                className="container mx-auto flex flex-col items-start  gap-1
                     laptop-sm:flex-row
                     laptop-sm:items-center
                     laptop-sm:justify-between"
