@@ -1,14 +1,18 @@
-import { FC, FormEvent, useState } from 'react';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
 
 const EmailSubscribe: FC = () => {
-    const [email, setEmail] = useState('');
-    const [isSubscribed, setIsSubscribed] = useState(false);
+    const [email, setEmail] = useState<string>('');
+    const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         console.log('Email submitted:', email);
         setIsSubscribed(true);
         setEmail('');
+    };
+
+    const handleSetEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
     };
 
     return (
@@ -22,7 +26,7 @@ const EmailSubscribe: FC = () => {
                     <input
                         type="email"
                         value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        onChange={handleSetEmail}
                         placeholder="E-mail"
                         className="bg-white text-gray-400 px-3 py-2 text-sm w-1/2"
                         required
