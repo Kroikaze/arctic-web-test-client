@@ -17,7 +17,7 @@ const Header: FC = () => {
 
     return (
         <header className="bg-white">
-            <div className="container mx-auto flex justify-between items-center px-3 py-4">
+            <div className="container mx-auto flex justify-between items-center px-4 py-4">
                 {!isLaptopSm && (
                     <button onClick={toggleMobileMenu} className="text-2xl laptop-sm:hidden">
                         ☰

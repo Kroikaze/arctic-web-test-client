@@ -47,7 +47,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         return (
                             <div
                                 key={nav.text}
-                                className="relative uppercase mx-3 cursor-pointer"
+                                className="relative uppercase p-4 cursor-pointer"
                                 onMouseEnter={handleOpenDropdown}
                             >
                                 <div
@@ -78,11 +78,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         );
                     }
                     return (
-                        <Link
-                            key={nav.text}
-                            to={nav.link}
-                            className="font-semibold uppercase mx-3 py-6"
-                        >
+                        <Link key={nav.text} to={nav.link} className="font-semibold uppercase p-4">
                             {nav.text}
                         </Link>
                     );
