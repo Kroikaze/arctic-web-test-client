@@ -47,7 +47,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         return (
                             <div
                                 key={nav.text}
-                                className="relative uppercase p-4 cursor-pointer"
+                                className="relative uppercase p-4 cursor-pointer max-laptop-sm:w-full"
                                 onMouseEnter={handleOpenDropdown}
                                 onMouseLeave={closeDropdown}
                                 // onClick={handleToggleDropdown}
@@ -77,7 +77,11 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         );
                     }
                     return (
-                        <Link key={nav.text} to={nav.link} className="font-semibold uppercase p-4">
+                        <Link
+                            key={nav.text}
+                            to={nav.link}
+                            className="font-semibold uppercase p-4 max-laptop-sm:w-full"
+                        >
                             {nav.text}
                         </Link>
                     );
