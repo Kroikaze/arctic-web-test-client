@@ -83,6 +83,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
                                     value={phone}
                                     onChange={handleChangePhone}
                                     className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    pattern="\+?[0-9]*"
                                     required
                                 />
                                 <button
