@@ -48,7 +48,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
 
             <span
                 className="text-sm underline text-latte pb-3 cursor-pointer"
-                onMouseEnter={handleOpenDropdown}
+                onClick={handleOpenDropdown}
             >
                 Заказать обратный звонок
             </span>
