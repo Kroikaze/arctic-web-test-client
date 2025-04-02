@@ -8,7 +8,7 @@ interface DropdownMenuProps {
 
 const DropdownMenu: FC<DropdownMenuProps> = ({ items, callback }) => {
     return (
-        <div className="absolute -left-6 w-36 mt-6 bg-latte animate-fade-in">
+        <div className="absolute -left-1 w-36 mt-4 bg-latte animate-fade-in">
             <div className="absolute -top-2 left-1/2 -translate-x-1/2 rotate-45 w-4 h-4 bg-latte"></div>
             {items.map(item => (
                 <Link

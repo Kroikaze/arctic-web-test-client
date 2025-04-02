@@ -24,9 +24,9 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         setDropdownOpen(false);
     };
 
-    const handleToggleDropdown = () => {
-        setDropdownOpen(prevState => !prevState);
-    };
+    // const handleToggleDropdown = () => {
+    //     setDropdownOpen(prevState => !prevState);
+    // };
 
     return (
         <nav
@@ -49,11 +49,10 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                 key={nav.text}
                                 className="relative uppercase p-4 cursor-pointer"
                                 onMouseEnter={handleOpenDropdown}
+                                onMouseLeave={closeDropdown}
+                                // onClick={handleToggleDropdown}
                             >
-                                <div
-                                    onClick={handleToggleDropdown}
-                                    className="font-semibold flex items-center"
-                                >
+                                <div className="font-semibold flex items-center">
                                     {nav.text}
                                     <img
                                         src={arrow}
