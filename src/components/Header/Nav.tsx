@@ -31,11 +31,9 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     return (
         <nav
             className={`
-                ${isMobileOpen ? 'block w-fit' : 'hidden'} 
-                top-0
+                ${isMobileOpen ? 'fixed top-0 left-0 max-h-screen overflow-y-auto' : 'hidden'} 
                 laptop-sm:block 
                 laptop-sm:w-full
-                max-laptop-sm:absolute 
                 bg-gray-100
                 `}
         >
