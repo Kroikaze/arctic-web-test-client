@@ -16,4 +16,5 @@
     --breakpoint-mobile-md: 390px;
     --breakpoint-mobile-sm: 375px;
     --breakpoint-mobile-xs: 360px;
+    --breakpoint-mobile-2xs: 320px;
 }
