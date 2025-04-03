@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 
+import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import useScreenSize from '@/hooks/useScreenSize';
 
 import Logo from './Logo.tsx';
@@ -15,6 +16,10 @@ const Header: FC = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
 
+    const handleCloseMobileMenu = () => {
+        setMobileMenuOpen(false);
+    };
+
     return (
         <header className="bg-white">
             <div className="container mx-auto flex justify-between items-center px-4 py-4">
@@ -27,7 +32,14 @@ const Header: FC = () => {
                 {isLaptopSm && <RequestCall />}
                 <ShoppingCart />
             </div>
-            <Nav isMobileOpen={isMobileMenuOpen} />
+
+            {!isLaptopSm && isMobileMenuOpen && (
+                <DropdownWrapper callback={handleCloseMobileMenu}>
+                    <Nav isMobileOpen={isMobileMenuOpen} />
+                </DropdownWrapper>
+            )}
+
+            {isLaptopSm && <Nav />}
         </header>
     );
 };
