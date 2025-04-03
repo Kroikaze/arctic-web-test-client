@@ -53,6 +53,10 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                 onMouseEnter={handleOpenDropdown}
                                 onMouseLeave={closeDropdown}
                                 // onClick={handleToggleDropdown}
+                                // чи потрібна така реалізація?
+                                // onMouseEnter={isLaptopSm ? handleOpenDropdown : undefined}
+                                // onMouseLeave={isLaptopSm ? closeDropdown : undefined}
+                                // onClick={!isLaptopSm ? handleOpenDropdown : undefined}
                             >
                                 <div className="font-semibold flex items-center">
                                     {nav.text}
