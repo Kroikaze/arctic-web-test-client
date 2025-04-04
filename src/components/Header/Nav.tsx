@@ -12,15 +12,14 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
-    const { isLaptopSm } = useScreenSize();
+    const { BigScreen } = useScreenSize();
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
     return (
         <nav
             className={`
                 ${isMobileOpen ? 'fixed top-0 left-0 max-h-screen overflow-y-auto' : ''} 
-                ${!isMobileOpen && !isLaptopSm ? 'hidden' : 'block'}
-                laptop-sm:block 
+                ${!isMobileOpen && !BigScreen ? 'hidden' : 'block'}
                 laptop-sm:w-full
                 bg-gray-100
                 `}
@@ -37,7 +36,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                             <div
                                 key={nav.text}
                                 className="relative uppercase p-4 cursor-pointer max-laptop-sm:w-full group"
-                                onClick={() => !isLaptopSm && setDropdownOpen(!isDropdownOpen)}
+                                onClick={() => !BigScreen && setDropdownOpen(!isDropdownOpen)}
                             >
                                 <div className="font-semibold flex items-center">
                                     {nav.text}
@@ -53,7 +52,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                         { text: 'Мужские часы', link: '/watches/men' },
                                     ]}
                                     className={`
-                                              ${isLaptopSm ? 'hidden group-hover:block' : ''} 
+                                              ${BigScreen ? 'hidden group-hover:block' : ''} 
                                               ${isDropdownOpen ? 'block' : 'hidden'}
                                             `}
                                 />
@@ -70,7 +69,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         </Link>
                     );
                 })}
-                {isMobileOpen && !isLaptopSm && (
+                {isMobileOpen && !BigScreen && (
                     <RequestCall externalClasses="flex mx-3 py-6 border-t border-gray-800" />
                 )}
             </div>
