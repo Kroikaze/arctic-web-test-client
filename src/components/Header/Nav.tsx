@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
 import DropdownMenu from '@/components/Header/DropdownMenu.tsx';
-import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import RequestCall from '@/components/Header/RequestCall.tsx';
 import { navs } from '@/constants/navLinks.ts';
 import useScreenSize from '@/hooks/useScreenSize.ts';
@@ -13,20 +12,8 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
-    const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const { isLaptopSm } = useScreenSize();
-
-    const handleOpenDropdown = () => {
-        setDropdownOpen(true);
-    };
-
-    const closeDropdown = () => {
-        setDropdownOpen(false);
-    };
-
-    // const handleToggleDropdown = () => {
-    //     setDropdownOpen(prevState => !prevState);
-    // };
+    const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
     return (
         <nav
@@ -49,36 +36,27 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         return (
                             <div
                                 key={nav.text}
-                                className="relative uppercase p-4 cursor-pointer max-laptop-sm:w-full"
-                                onMouseEnter={handleOpenDropdown}
-                                onMouseLeave={closeDropdown}
-                                // onClick={handleToggleDropdown}
-                                // чи потрібна така реалізація?
-                                // onMouseEnter={isLaptopSm ? handleOpenDropdown : undefined}
-                                // onMouseLeave={isLaptopSm ? closeDropdown : undefined}
-                                // onClick={!isLaptopSm ? handleOpenDropdown : undefined}
+                                className="relative uppercase p-4 cursor-pointer max-laptop-sm:w-full group"
+                                onClick={() => !isLaptopSm && setDropdownOpen(!isDropdownOpen)}
                             >
                                 <div className="font-semibold flex items-center">
                                     {nav.text}
                                     <img
                                         src={arrow}
                                         alt="arrow"
-                                        className={`w-2 h-1 ml-2 duration-150 ${
-                                            isDropdownOpen ? 'rotate-0' : 'rotate-180'
-                                        }`}
+                                        className="w-2 h-1 ml-2 duration-150 group-hover:rotate-0 rotate-180"
                                     />
                                 </div>
-                                {isDropdownOpen && (
-                                    <DropdownWrapper callback={closeDropdown}>
-                                        <DropdownMenu
-                                            items={[
-                                                { text: 'Женские часы', link: '/watches/women' },
-                                                { text: 'Мужские часы', link: '/watches/men' },
-                                            ]}
-                                            callback={closeDropdown}
-                                        />
-                                    </DropdownWrapper>
-                                )}
+                                <DropdownMenu
+                                    items={[
+                                        { text: 'Женские часы', link: '/watches/women' },
+                                        { text: 'Мужские часы', link: '/watches/men' },
+                                    ]}
+                                    className={`
+                                              ${isLaptopSm ? 'hidden group-hover:block' : ''} 
+                                              ${isDropdownOpen ? 'block' : 'hidden'}
+                                            `}
+                                />
                             </div>
                         );
                     }
