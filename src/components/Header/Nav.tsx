@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
 import arrow from '@/assets/Images/Arrow.png';
@@ -15,10 +16,37 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     const { BigScreen } = useScreenSize();
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
+    const portalPosition = {
+        top: 100,
+        left: 100,
+        width: 200,
+    };
+
+    const portalDropdown = (
+        <div
+            style={{
+                position: 'fixed',
+                top: `${portalPosition.top}px`,
+                left: `${portalPosition.left}px`,
+                width: `${portalPosition.width}px`,
+                backgroundColor: 'white',
+                border: '1px solid red',
+                zIndex: 1000,
+            }}
+        >
+            <DropdownMenu
+                items={[
+                    { text: 'Женские часы', link: '/watches/women' },
+                    { text: 'Мужские часы', link: '/watches/men' },
+                ]}
+            />
+        </div>
+    );
+
     return (
         <nav
             className={`
-                ${isMobileOpen ? 'fixed top-0 left-0 max-h-screen overflow-y-auto' : ''} 
+                ${isMobileOpen ? 'fixed top-0 left-0' : ''} 
                 ${!isMobileOpen && !BigScreen ? 'hidden' : 'block'}
                 laptop-sm:w-full
                 bg-gray-100
@@ -28,7 +56,9 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                 className="container mx-auto flex flex-col items-start  gap-1
                     laptop-sm:flex-row
                     laptop-sm:items-center
-                    laptop-sm:justify-between"
+                    laptop-sm:justify-between
+                    max-laptop-sm:overflow-y-auto
+                    max-laptop-sm:max-h-screen"
             >
                 {navs.map(nav => {
                     if (nav.link === undefined) {
@@ -56,6 +86,9 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                               ${isDropdownOpen ? 'block' : 'hidden'}
                                             `}
                                 />
+                                {!BigScreen &&
+                                    isDropdownOpen &&
+                                    createPortal(portalDropdown, document.body)}
                             </div>
                         );
                     }
