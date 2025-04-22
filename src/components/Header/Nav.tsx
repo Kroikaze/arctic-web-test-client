@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
 
@@ -20,32 +20,27 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
 
     const [portalPosition, setPortalPosition] = useState({ top: 0, left: 0, width: 0 });
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (divRef.current) {
-                const rect = divRef.current.getBoundingClientRect();
-                console.log('Координати:', {
-                    top: rect.top,
-                    left: rect.left,
-                    width: rect.width,
-                });
-                setPortalPosition({
-                    top: rect.bottom + window.scrollY,
-                    left: rect.left + window.scrollX,
-                    width: rect.width,
-                });
-            }
-        };
+    const updatePortalPosition = useCallback(() => {
+        if (divRef.current) {
+            const rect = divRef.current.getBoundingClientRect();
+            setPortalPosition({
+                top: rect.bottom + window.scrollY,
+                left: rect.left + window.scrollX,
+                width: rect.width,
+            });
+        }
+    }, []);
 
-        window.addEventListener('scroll', handleScroll);
+    useEffect(() => {
+        window.addEventListener('scroll', updatePortalPosition);
         const container = containerRef.current;
         if (container) {
-            container.addEventListener('scroll', handleScroll);
+            container.addEventListener('scroll', updatePortalPosition);
         }
 
         return () => {
-            window.removeEventListener('scroll', handleScroll);
-            container?.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('scroll', updatePortalPosition);
+            container?.removeEventListener('scroll', updatePortalPosition);
         };
     }, []);
 
