@@ -12,10 +12,6 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
     const [phone, setPhone] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-    // const handleOpenDropdown = () => {
-    //     setDropdownOpen(true);
-    // };
-
     const handleToggleDropdown = () => {
         setDropdownOpen(prevState => !prevState);
     };

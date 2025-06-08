@@ -9,7 +9,7 @@ const App = () => {
         <Router>
             <div className="min-h-screen flex flex-col">
                 <Header />
-                <div className="h-100 bg-latte flex-grow">
+                <div className="h-100 bg-latte flex-grow container mx-auto">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus ducimus
                     impedit maxime nam, nemo numquam reiciendis rerum. Fugit laudantium nostrum
                     numquam saepe! A, aut corporis cum fugit iusto magnam mollitia quidem similique

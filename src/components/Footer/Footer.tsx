@@ -1,7 +1,9 @@
 import { FC } from 'react';
 
+import YoutubeIcon from '@/assets/Images/YoutubeIcon.png';
 import FooterList from '@/components/Footer/FooterList.tsx';
 import Logo from '@/components/Header/Logo.tsx';
+import RequestCall from '@/components/Header/RequestCall.tsx';
 
 import EmailSubscribe from './EmailSubscribe';
 
@@ -34,6 +36,21 @@ const Footer: FC = () => {
                 <div className="grid grid-cols-2 gap-16 max-laptop-sm:gap-8">
                     <FooterList items={leftItems} />
                     <FooterList items={rightItems} />
+                </div>
+                <div className="flex-col space-y-6">
+                    <RequestCall externalClasses="text-white" />
+                    <div className="flex justify-end gap-2">
+                        <img
+                            src={YoutubeIcon}
+                            alt="YouTube"
+                            className="p-1.5 bg-latte rounded-full w-8 h-8"
+                        />
+                        <img
+                            src={YoutubeIcon}
+                            alt="another YouTube"
+                            className="p-1.5 bg-latte rounded-full w-8 h-8"
+                        />
+                    </div>
                 </div>
             </div>
         </div>

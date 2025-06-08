@@ -47,12 +47,10 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         const container = containerRef.current;
         container?.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Викликаємо лише якщо елемент точно є
         requestAnimationFrame(() => {
             if (portalRef.current?.offsetWidth && portalRef.current.offsetWidth > 0) {
                 updatePortalPosition();
             } else {
-                // fallback через кадр, якщо ще не відрендерилось повністю
                 requestAnimationFrame(updatePortalPosition);
             }
         });
