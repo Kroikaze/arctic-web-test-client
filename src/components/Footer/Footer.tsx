@@ -28,16 +28,18 @@ const Footer: FC = () => {
 
     return (
         <div className="bg-black">
-            <div className="container mx-auto flex justify-between ">
-                <div className="flex-col">
+            <div className="container mx-auto flex gap-12 justify-between py-12">
+                <div className="flex-col gap-6 max-w-80">
                     <Logo externalClasses="text-white text-left" />
                     <EmailSubscribe />
                 </div>
-                <div className="grid grid-cols-2 gap-16 max-laptop-sm:gap-8">
+
+                <div className="grid grid-cols-2 gap-16">
                     <FooterList items={leftItems} />
                     <FooterList items={rightItems} />
                 </div>
-                <div className="flex-col space-y-6">
+
+                <div className="flex-col justify-between ">
                     <RequestCall externalClasses="text-white" />
                     <div className="flex justify-end gap-2">
                         <img
