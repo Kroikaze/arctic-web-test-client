@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 
 const useScreenSize = () => {
-    const [isLaptopSm, setIsLaptopSm] = useState(false);
-    console.log('useScreenSize');
+    const [isBigScreen, setIsBigScreen] = useState<boolean>(false);
 
     useEffect(() => {
         const checkScreenSize = () => {
-            setIsLaptopSm(window.innerWidth >= 1366);
+            setIsBigScreen(window.innerWidth >= 1366);
         };
 
         checkScreenSize();
@@ -15,7 +14,7 @@ const useScreenSize = () => {
         return () => window.removeEventListener('resize', checkScreenSize);
     }, []);
 
-    return { isLaptopSm };
+    return { isBigScreen };
 };
 
 export default useScreenSize;

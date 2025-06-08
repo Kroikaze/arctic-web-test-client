@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 
+import DropdownWrapper from '@/components/Header/DropdownWrapper.tsx';
 import useScreenSize from '@/hooks/useScreenSize';
 
 import Logo from './Logo.tsx';
@@ -9,25 +10,39 @@ import ShoppingCart from './ShoppingCart.tsx';
 
 const Header: FC = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const { isLaptopSm } = useScreenSize();
+    const { isBigScreen } = useScreenSize();
 
     const toggleMobileMenu = () => {
-        setMobileMenuOpen(!isMobileMenuOpen);
+        setMobileMenuOpen(prevState => !prevState);
+    };
+
+    const handleCloseMobileMenu = () => {
+        setMobileMenuOpen(false);
     };
 
     return (
         <header className="bg-white">
-            <div className="container mx-auto flex justify-between items-center px-6 py-4">
-                {!isLaptopSm && (
+            <div className="container mx-auto flex justify-between items-center px-4 py-4">
+                {!isBigScreen && (
                     <button onClick={toggleMobileMenu} className="text-2xl laptop-sm:hidden">
                         ☰
                     </button>
                 )}
+
                 <Logo />
-                {isLaptopSm && <RequestCall />}
+
+                {isBigScreen && <RequestCall />}
+
                 <ShoppingCart />
             </div>
-            <Nav isMobileOpen={isMobileMenuOpen} />
+
+            {!isBigScreen && isMobileMenuOpen && (
+                <DropdownWrapper callback={handleCloseMobileMenu}>
+                    <Nav isMobileOpen={isMobileMenuOpen} />
+                </DropdownWrapper>
+            )}
+
+            {isBigScreen && <Nav />}
         </header>
     );
 };

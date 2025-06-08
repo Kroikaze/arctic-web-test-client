@@ -12,8 +12,12 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
     const [phone, setPhone] = useState<string>('');
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-    const handleOpenDropdown = () => {
-        setDropdownOpen(true);
+    // const handleOpenDropdown = () => {
+    //     setDropdownOpen(true);
+    // };
+
+    const handleToggleDropdown = () => {
+        setDropdownOpen(prevState => !prevState);
     };
 
     const closeDropdown = () => {
@@ -46,22 +50,22 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
                 8 (800) 302 79 15
             </a>
 
-            <span
-                className="text-sm underline text-latte pb-3 cursor-pointer"
-                onMouseEnter={handleOpenDropdown}
+            <div
+                className="text-sm underline text-latte pb-3 cursor-pointer relative z-20"
+                onClick={handleToggleDropdown}
             >
                 Заказать обратный звонок
-            </span>
+            </div>
 
             {isDropdownOpen && (
                 <DropdownWrapper callback={closeDropdown}>
                     <div
                         className="
-                            absolute bottom-full mb-2 bg-white border border-gray-200 p-4 w-64
-                            laptop-sm:bottom-auto
-                            laptop-sm:right-0
-                            laptop-sm:top-full
-                            laptop-sm:mt-2"
+                                absolute bottom-full mb-2 bg-white border border-gray-200 p-4 w-64 z-10
+                                laptop-sm:bottom-auto
+                                laptop-sm:right-0
+                                laptop-sm:top-full
+                                laptop-sm:mt-2"
                     >
                         {isSubmitted ? (
                             <p className="text-sm">
@@ -83,6 +87,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
                                     value={phone}
                                     onChange={handleChangePhone}
                                     className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    pattern="\+?[0-9]*"
                                     required
                                 />
                                 <button
