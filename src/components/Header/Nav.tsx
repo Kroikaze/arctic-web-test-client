@@ -13,7 +13,7 @@ interface NavProps {
 }
 
 const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
-    const { BigScreen } = useScreenSize();
+    const { isBigScreen } = useScreenSize();
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const divRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -30,25 +30,38 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         portal.style.width = `${rect.width}px`;
     }, []);
 
+    const handleToggleDropdown = () => {
+        if (!isBigScreen) {
+            setDropdownOpen(prevState => !prevState);
+        }
+    };
+
     useEffect(() => {
+        if (!isDropdownOpen || !portalRef.current) return;
+
         const handleScroll = () => {
             requestAnimationFrame(updatePortalPosition);
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
         const container = containerRef.current;
-        if (container) {
-            container.addEventListener('scroll', handleScroll, { passive: true });
-        }
+        container?.addEventListener('scroll', handleScroll, { passive: true });
 
-        // Первинне оновлення
-        updatePortalPosition();
+        // Викликаємо лише якщо елемент точно є
+        requestAnimationFrame(() => {
+            if (portalRef.current?.offsetWidth && portalRef.current.offsetWidth > 0) {
+                updatePortalPosition();
+            } else {
+                // fallback через кадр, якщо ще не відрендерилось повністю
+                requestAnimationFrame(updatePortalPosition);
+            }
+        });
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
             container?.removeEventListener('scroll', handleScroll);
         };
-    }, [updatePortalPosition]);
+    }, [isDropdownOpen, updatePortalPosition]);
 
     const portalDropdown = (
         <div
@@ -57,7 +70,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                 position: 'fixed',
                 top: 0,
                 left: 0,
-                width: '0px',
+                width: 0,
                 transform: 'translate(0, 0)',
                 backgroundColor: 'white',
                 zIndex: 1000,
@@ -77,7 +90,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         <nav
             className={`
                 ${isMobileOpen ? 'fixed top-0 left-0' : ''} 
-                ${!isMobileOpen && !BigScreen ? 'hidden' : 'block'}
+                ${!isMobileOpen && !isBigScreen ? 'hidden' : 'block'}
                 laptop-sm:w-full
                 bg-gray-100
                 `}
@@ -98,7 +111,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                 ref={divRef}
                                 key={nav.text}
                                 className="relative uppercase p-4 cursor-pointer max-laptop-sm:w-full group"
-                                onClick={() => !BigScreen && setDropdownOpen(!isDropdownOpen)}
+                                onClick={handleToggleDropdown}
                             >
                                 <div className="font-semibold flex items-center">
                                     {nav.text}
@@ -108,19 +121,19 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                         className="w-2 h-1 ml-2 duration-150 group-hover:rotate-0 rotate-180"
                                     />
                                 </div>
-                                {BigScreen && (
+                                {isBigScreen && (
                                     <DropdownMenu
                                         items={[
                                             { text: 'Женские часы', link: '/watches/women' },
                                             { text: 'Мужские часы', link: '/watches/men' },
                                         ]}
                                         className={`
-                                            ${BigScreen ? 'hidden group-hover:block' : ''} 
+                                            ${isBigScreen ? 'hidden group-hover:block' : ''} 
                                             ${isDropdownOpen ? 'block' : 'hidden'}
                                         `}
                                     />
                                 )}
-                                {!BigScreen &&
+                                {!isBigScreen &&
                                     isDropdownOpen &&
                                     createPortal(portalDropdown, document.body)}
                             </div>
@@ -136,7 +149,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                         </Link>
                     );
                 })}
-                {isMobileOpen && !BigScreen && (
+                {isMobileOpen && !isBigScreen && (
                     <RequestCall externalClasses="flex mx-3 py-6 border-t border-gray-800" />
                 )}
             </div>

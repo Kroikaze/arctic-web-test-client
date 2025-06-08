@@ -10,10 +10,10 @@ import ShoppingCart from './ShoppingCart.tsx';
 
 const Header: FC = () => {
     const [isMobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const { BigScreen } = useScreenSize();
+    const { isBigScreen } = useScreenSize();
 
     const toggleMobileMenu = () => {
-        setMobileMenuOpen(!isMobileMenuOpen);
+        setMobileMenuOpen(prevState => !prevState);
     };
 
     const handleCloseMobileMenu = () => {
@@ -23,23 +23,26 @@ const Header: FC = () => {
     return (
         <header className="bg-white">
             <div className="container mx-auto flex justify-between items-center px-4 py-4">
-                {!BigScreen && (
+                {!isBigScreen && (
                     <button onClick={toggleMobileMenu} className="text-2xl laptop-sm:hidden">
                         ☰
                     </button>
                 )}
+
                 <Logo />
-                {BigScreen && <RequestCall />}
+
+                {isBigScreen && <RequestCall />}
+
                 <ShoppingCart />
             </div>
 
-            {!BigScreen && isMobileMenuOpen && (
+            {!isBigScreen && isMobileMenuOpen && (
                 <DropdownWrapper callback={handleCloseMobileMenu}>
                     <Nav isMobileOpen={isMobileMenuOpen} />
                 </DropdownWrapper>
             )}
 
-            {BigScreen && <Nav />}
+            {isBigScreen && <Nav />}
         </header>
     );
 };
