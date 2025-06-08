@@ -17,43 +17,51 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
     const divRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-
-    const [portalPosition, setPortalPosition] = useState({ top: 0, left: 0, width: 0 });
+    const portalRef = useRef<HTMLDivElement>(null);
 
     const updatePortalPosition = useCallback(() => {
-        if (divRef.current) {
-            const rect = divRef.current.getBoundingClientRect();
-            setPortalPosition({
-                top: rect.bottom + window.scrollY,
-                left: rect.left + window.scrollX,
-                width: rect.width,
-            });
-        }
+        if (!divRef.current || !portalRef.current) return;
+
+        const rect = divRef.current.getBoundingClientRect();
+        const portal = portalRef.current;
+
+        // Безпосереднє оновлення стилів порталу, без React-стану
+        portal.style.transform = `translate(${rect.left}px, ${rect.bottom}px)`;
+        portal.style.width = `${rect.width}px`;
     }, []);
 
     useEffect(() => {
-        window.addEventListener('scroll', updatePortalPosition);
+        const handleScroll = () => {
+            requestAnimationFrame(updatePortalPosition);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         const container = containerRef.current;
         if (container) {
-            container.addEventListener('scroll', updatePortalPosition);
+            container.addEventListener('scroll', handleScroll, { passive: true });
         }
 
+        // Первинне оновлення
+        updatePortalPosition();
+
         return () => {
-            window.removeEventListener('scroll', updatePortalPosition);
-            container?.removeEventListener('scroll', updatePortalPosition);
+            window.removeEventListener('scroll', handleScroll);
+            container?.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [updatePortalPosition]);
 
     const portalDropdown = (
         <div
+            ref={portalRef}
             style={{
                 position: 'fixed',
-                top: `${portalPosition.top}px`,
-                left: `${portalPosition.left}px`,
-                width: `${portalPosition.width}px`,
+                top: 0,
+                left: 0,
+                width: '0px',
+                transform: 'translate(0, 0)',
                 backgroundColor: 'white',
-                border: '1px solid red',
                 zIndex: 1000,
+                willChange: 'transform',
             }}
         >
             <DropdownMenu
@@ -76,7 +84,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         >
             <div
                 ref={containerRef}
-                className="container mx-auto flex flex-col items-start  gap-1
+                className="container mx-auto flex flex-col items-start gap-1
                     laptop-sm:flex-row
                     laptop-sm:items-center
                     laptop-sm:justify-between
@@ -107,9 +115,9 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
                                             { text: 'Мужские часы', link: '/watches/men' },
                                         ]}
                                         className={`
-                                              ${BigScreen ? 'hidden group-hover:block' : ''} 
-                                              ${isDropdownOpen ? 'block' : 'hidden'}
-                                            `}
+                                            ${BigScreen ? 'hidden group-hover:block' : ''} 
+                                            ${isDropdownOpen ? 'block' : 'hidden'}
+                                        `}
                                     />
                                 )}
                                 {!BigScreen &&
