@@ -28,7 +28,11 @@ const Footer: FC = () => {
 
     return (
         <div className="bg-black">
-            <div className="container mx-auto flex gap-12 justify-between py-12">
+            <div
+                className="container mx-auto flex flex-col gap-12 justify-between p-4
+                            laptop-sm:flex-row
+                            laptop-sm:py-12"
+            >
                 <div className="flex-col gap-6 max-w-80">
                     <Logo externalClasses="text-white text-left" />
                     <EmailSubscribe />
@@ -41,7 +45,7 @@ const Footer: FC = () => {
 
                 <div className="flex-col justify-between ">
                     <RequestCall externalClasses="text-white" />
-                    <div className="flex justify-end gap-2">
+                    <div className="flex justify-center laptop-sm:justify-end gap-2">
                         <img
                             src={YoutubeIcon}
                             alt="YouTube"
