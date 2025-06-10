@@ -27,7 +27,7 @@ const Footer: FC = () => {
     ];
 
     return (
-        <div className="bg-black">
+        <footer className="bg-black">
             <div
                 className="container mx-auto flex flex-col gap-12 justify-between p-4
                             laptop-sm:flex-row
@@ -59,7 +59,7 @@ const Footer: FC = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 
