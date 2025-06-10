@@ -7,9 +7,9 @@ import Header from './components/Header/Header.tsx';
 const App = () => {
     return (
         <Router>
-            <div className="min-h-screen flex flex-col">
+            <div className="grid grid-rows-[auto_1fr_auto]">
                 <Header />
-                <div className="h-100 bg-latte flex-grow container mx-auto">
+                <div className="h-100 bg-latte container mx-auto p-4">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus ducimus
                     impedit maxime nam, nemo numquam reiciendis rerum. Fugit laudantium nostrum
                     numquam saepe! A, aut corporis cum fugit iusto magnam mollitia quidem similique

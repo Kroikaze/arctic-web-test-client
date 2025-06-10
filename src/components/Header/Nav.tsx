@@ -25,7 +25,6 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
         const rect = divRef.current.getBoundingClientRect();
         const portal = portalRef.current;
 
-        // Безпосереднє оновлення стилів порталу, без React-стану
         portal.style.transform = `translate(${rect.left}px, ${rect.bottom}px)`;
         portal.style.width = `${rect.width}px`;
     }, []);
@@ -87,7 +86,7 @@ const Nav: FC<NavProps> = ({ isMobileOpen = false }) => {
     return (
         <nav
             className={`
-                ${isMobileOpen ? 'fixed top-0 left-0' : ''} 
+                ${isMobileOpen ? 'fixed top-0 left-0 z-30' : ''} 
                 ${!isMobileOpen && !isBigScreen ? 'hidden' : 'block'}
                 laptop-sm:w-full
                 bg-gray-100

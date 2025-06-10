@@ -74,7 +74,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
                                     placeholder="Ваше имя"
                                     value={name}
                                     onChange={handleChangeName}
-                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg text-gray-800 placeholder:text-gray-300"
                                     required
                                 />
                                 <input
@@ -82,7 +82,7 @@ const RequestCall: FC<RequestCallProps> = ({ externalClasses = 'flex' }) => {
                                     placeholder="Номер телефона"
                                     value={phone}
                                     onChange={handleChangePhone}
-                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
+                                    className="w-full p-2 mb-2 border border-gray-300 rounded-lg text-gray-800 placeholder:text-gray-300"
                                     pattern="\+?[0-9]*"
                                     required
                                 />
